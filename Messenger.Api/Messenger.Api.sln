@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Api", "Messenger.
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Messenger.Database", "..\..\messenger-database\Messenger.Database\Messenger.Database\Messenger.Database.sqlproj", "{1C540EE8-9993-4B8E-91D4-EBB638183E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Api.UnitTests", "Messenger.Api.Tests\Messenger.Api.UnitTests.csproj", "{3066C06D-AE43-47CA-B023-0790B4F33EDF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Common", "..\..\zmessenger-common\Messenger.Common\Messenger.Common.csproj", "{62F66502-FE44-4F54-ADBA-704FC76B4539}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Api.EndpointTests", "Messenger.Api.EndpointTests\Messenger.Api.EndpointTests.csproj", "{AC1C99E1-69DB-4DBC-BF03-CB4D185004FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Common", "..\..\messenger-common\Messenger.Common\Messenger.Common.csproj", "{3C63F18E-197F-46DB-B27A-1C5BB1BFD473}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.Api.UnitTests", "Messenger.Api.UnitTests\Messenger.Api.UnitTests.csproj", "{4936A52B-5A6B-411F-B5B8-A7661A01498E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,18 +29,18 @@ Global
 		{1C540EE8-9993-4B8E-91D4-EBB638183E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C540EE8-9993-4B8E-91D4-EBB638183E5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C540EE8-9993-4B8E-91D4-EBB638183E5E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{3066C06D-AE43-47CA-B023-0790B4F33EDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3066C06D-AE43-47CA-B023-0790B4F33EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3066C06D-AE43-47CA-B023-0790B4F33EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3066C06D-AE43-47CA-B023-0790B4F33EDF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62F66502-FE44-4F54-ADBA-704FC76B4539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62F66502-FE44-4F54-ADBA-704FC76B4539}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62F66502-FE44-4F54-ADBA-704FC76B4539}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62F66502-FE44-4F54-ADBA-704FC76B4539}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC1C99E1-69DB-4DBC-BF03-CB4D185004FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC1C99E1-69DB-4DBC-BF03-CB4D185004FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC1C99E1-69DB-4DBC-BF03-CB4D185004FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1C99E1-69DB-4DBC-BF03-CB4D185004FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C63F18E-197F-46DB-B27A-1C5BB1BFD473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C63F18E-197F-46DB-B27A-1C5BB1BFD473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C63F18E-197F-46DB-B27A-1C5BB1BFD473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C63F18E-197F-46DB-B27A-1C5BB1BFD473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4936A52B-5A6B-411F-B5B8-A7661A01498E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4936A52B-5A6B-411F-B5B8-A7661A01498E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4936A52B-5A6B-411F-B5B8-A7661A01498E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4936A52B-5A6B-411F-B5B8-A7661A01498E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

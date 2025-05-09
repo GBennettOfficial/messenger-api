@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\messenger-common\Messenger.Common\Messenger.Common.csproj" />
     <ProjectReference Include="..\..\..\zmessenger-common\Messenger.Common\Messenger.Common.csproj" />
     <ProjectReference Include="..\Messenger.Api\Messenger.Api.csproj" />
   </ItemGroup>

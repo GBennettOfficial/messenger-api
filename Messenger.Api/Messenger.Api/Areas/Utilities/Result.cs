@@ -8,7 +8,7 @@ namespace Messenger.Api.Utilities
     {
         public Result(ResultCode Code, string Message = "")
         {
-            if (Code != ResultCode.Success && Code != ResultCode.Cancelled && Message == "")
+            if (Code != ResultCode.Success && Code != ResultCode.Cancelled && Code != ResultCode.NotFound && Message == "")
             {
                 throw new ArgumentException(nameof(Message), "message cannot be empty unless result code is 'Success' or 'Canceled'");
             }

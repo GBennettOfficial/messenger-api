@@ -45,8 +45,10 @@ namespace Messenger.Api.Controllers
             _logger = logger;
         }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register(RegisterDto registerDto)
         {
             var validationResult = await _registerDtoValidator.ValidateAsync(registerDto);
             if (validationResult.IsValid == false)
@@ -81,7 +83,8 @@ namespace Messenger.Api.Controllers
             return Ok(jwt);
         }
 
-        [HttpPost("UsernameLogin")]
+        [HttpPost]
+        [Route("UsernameLogin")]
         public async Task<IActionResult> UsernameLogin([FromBody] UsernameLoginDto usernameLoginDto)
         {
             Result<User> findUserResult = await _userReader.FindByUsername(usernameLoginDto.Username);

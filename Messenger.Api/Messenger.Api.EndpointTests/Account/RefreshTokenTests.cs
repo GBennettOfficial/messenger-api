@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Messenger.Common;
 
 namespace Messenger.Api.EndpointTests.Account
 {
@@ -38,17 +39,17 @@ namespace Messenger.Api.EndpointTests.Account
             conn.Open();
             int newId = await conn.ExecuteScalarAsync<int>("usp_Create_User", user, commandType: System.Data.CommandType.StoredProcedure);
             user = user with { Id = newId };
-            JsonWebToken jwt = _jsonWebTokenProvider.CreateJsonWebToken(user);
+            JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(user);
             _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwt.Value);
 
             try
             {
                 // Act
                 HttpResponseMessage response = await _client.GetAsync("Account/RefreshToken");
-                JsonWebToken? responseJwt = null;
+                JsonWebTokenDto? responseJwt = null;
                 if (response.IsSuccessStatusCode)
                 {
-                    responseJwt = await response.Content.ReadFromJsonAsync<JsonWebToken>();
+                    responseJwt = await response.Content.ReadFromJsonAsync<JsonWebTokenDto>();
                 }
 
                 // Assert

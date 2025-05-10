@@ -1,5 +1,6 @@
 ﻿using Messenger.Api.Areas.Cryptography.Abstractions;
 using Messenger.Api.Areas.Data.Models;
+using Messenger.Common;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
@@ -22,7 +23,7 @@ namespace Messenger.Api.Areas.Cryptography.Services
             _audience = configuration["JsonWebToken:Audience"]!;
         }
 
-        public Models.JsonWebToken CreateJsonWebToken(User user)
+        public JsonWebTokenDto CreateJsonWebToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -46,7 +47,7 @@ namespace Messenger.Api.Areas.Cryptography.Services
             var jsonWebTokenHandler = new JsonWebTokenHandler();
             string tokenString = jsonWebTokenHandler.CreateToken(tokenDescriptor);
 
-            return new Models.JsonWebToken(tokenString);
+            return new JsonWebTokenDto(tokenString);
         }
     }
 }

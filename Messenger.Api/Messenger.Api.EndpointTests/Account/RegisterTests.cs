@@ -38,10 +38,10 @@ namespace Messenger.Api.EndpointTests.Account
 
                 // Act
                 HttpResponseMessage response = await _client.PostAsJsonAsync("Account/Register", registerDto);
-                JsonWebToken? jwt = null;
+                JsonWebTokenDto? jwt = null;
                 if (response.IsSuccessStatusCode)
                 {
-                    jwt = await response.Content.ReadFromJsonAsync<JsonWebToken>();
+                    jwt = await response.Content.ReadFromJsonAsync<JsonWebTokenDto>();
                 }
                 int endCount = conn.ExecuteScalar<int>("SELECT COUNT(*) FROM Users WHERE Username = @Username", new { registerDto.Username });
 

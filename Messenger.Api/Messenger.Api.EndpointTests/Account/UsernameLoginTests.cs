@@ -43,10 +43,10 @@ namespace Messenger.Api.EndpointTests.Account
             {
                 // Act
                 HttpResponseMessage response = await _client.PostAsJsonAsync("Account/UsernameLogin", usernameLoginDto);
-                JsonWebToken? jwt = null;
+                JsonWebTokenDto? jwt = null;
                 if (response.IsSuccessStatusCode)
                 {
-                    jwt = await response.Content.ReadFromJsonAsync<JsonWebToken>();
+                    jwt = await response.Content.ReadFromJsonAsync<JsonWebTokenDto>();
                 }
 
                 // Assert

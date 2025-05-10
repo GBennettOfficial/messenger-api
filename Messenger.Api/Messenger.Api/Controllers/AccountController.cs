@@ -77,7 +77,7 @@ namespace Messenger.Api.Controllers
             if (createUserResult.Code != ResultCode.Success || createUserResult.Value is null)
                 return StatusCode(500, "Something went wrong");
 
-            JsonWebToken jwt = _jsonWebTokenProvider.CreateJsonWebToken(createUserResult.Value!);
+            JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(createUserResult.Value!);
 
             _logger.LogInformation("User {Username} registered", registerDto.Username);
 
@@ -108,7 +108,7 @@ namespace Messenger.Api.Controllers
             if (updateResult.Code != ResultCode.Success)
                 return StatusCode(500, "Something went wrong");
 
-            JsonWebToken jwt = _jsonWebTokenProvider.CreateJsonWebToken(findUserResult.Value!);
+            JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(findUserResult.Value!);
 
             _logger.LogInformation("User {Username} logged in", usernameLoginDto.Username);
 
@@ -125,7 +125,7 @@ namespace Messenger.Api.Controllers
             if (findUserResult.Code != ResultCode.Success)
                 return StatusCode(500, "Something went wrong");
 
-            JsonWebToken jwt = _jsonWebTokenProvider.CreateJsonWebToken(findUserResult.Value!);
+            JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(findUserResult.Value!);
 
             _logger.LogInformation("User {Username} refreshed token", username);
 

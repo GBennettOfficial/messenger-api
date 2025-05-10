@@ -2,6 +2,7 @@
 using Messenger.Api.Areas.Cryptography.Models;
 using Messenger.Api.Areas.Cryptography.Services;
 using Messenger.Api.Areas.Data.Models;
+using Messenger.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using System;
@@ -32,7 +33,7 @@ namespace Messenger.Api.UnitTests.Cryptography
             User user = new(0, "JohnDoe", "123456789012", "John", "Doe", "JohnDoe@email.com", null, "x", "x");
 
             // Act
-            JsonWebToken jsonWebToken = _jsonWebTokenProvider.CreateJsonWebToken(user);
+            JsonWebTokenDto jsonWebToken = _jsonWebTokenProvider.CreateJsonWebToken(user);
 
             // Assert
             Assert.NotNull(jsonWebToken);

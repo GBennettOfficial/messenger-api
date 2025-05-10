@@ -49,7 +49,8 @@ namespace Messenger.Api.EndpointTests.Account
                 JsonWebTokenDto? responseJwt = null;
                 if (response.IsSuccessStatusCode)
                 {
-                    responseJwt = await response.Content.ReadFromJsonAsync<JsonWebTokenDto>();
+                    var loginResponseDto = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
+                    responseJwt = loginResponseDto?.JsonWebToken;
                 }
 
                 // Assert

@@ -24,11 +24,11 @@ namespace Messenger.Api.UnitTests.Validation
             _userReader = NSubstitute.Substitute.For<IUserReader>();
             _validator = new RegisterDtoValidator(_userReader);
 
-            _userReader.FindByUsername(Arg.Any<string>())
+            _userReader.SearchByUsername(Arg.Any<string>())
                 .Returns(new Result<User>(ResultCode.NotFound, null, "x"));
-            _userReader.FindByEmail(Arg.Any<string>())             
+            _userReader.SearchByEmail(Arg.Any<string>())             
                 .Returns(new Result<User>(ResultCode.NotFound, null, "x"));
-            _userReader.FindByPhone(Arg.Any<string>())             
+            _userReader.SearchByPhone(Arg.Any<string>())             
                 .Returns(new Result<User>(ResultCode.NotFound, null, "x"));
 
             _emptyUser = new User(0, "", "", "", "", "", null, "", "");
@@ -38,7 +38,7 @@ namespace Messenger.Api.UnitTests.Validation
         public async Task Validate_UsernameExists_Invalid()
         {
             // Arrange
-            _userReader.FindByUsername("JohnCornwallis").Returns(new Result<User>(ResultCode.Success, _emptyUser));
+            _userReader.SearchByUsername("JohnCornwallis").Returns(new Result<User>(ResultCode.Success, _emptyUser));
             var registerDto = new RegisterDto("JohnCornwallis", "John", "CornWallis", "JohnCornwallis@email.com", null, null, "PAssword123!@#");
 
             // Act
@@ -53,7 +53,7 @@ namespace Messenger.Api.UnitTests.Validation
         public async Task Validate_EmailExists_Invalid()
         {
             // Arrange
-            _userReader.FindByEmail("JohnCornwallis@email.com").Returns(new Result<User>(ResultCode.Success, _emptyUser));
+            _userReader.SearchByEmail("JohnCornwallis@email.com").Returns(new Result<User>(ResultCode.Success, _emptyUser));
             var registerDto = new RegisterDto("JohnCornwallis", "John", "CornWallis", "JohnCornwallis@email.com", null, null, "PAssword123!@#");
 
             // Act
@@ -68,7 +68,7 @@ namespace Messenger.Api.UnitTests.Validation
         public async Task Validate_PhoneExists_Invalid()
         {
             // Arrange
-            _userReader.FindByPhone("1234567").Returns(new Result<User>(ResultCode.Success, _emptyUser));
+            _userReader.SearchByPhone("1234567").Returns(new Result<User>(ResultCode.Success, _emptyUser));
             var registerDto = new RegisterDto("JohnCornwallis", "John", "CornWallis", "JohnCornwallis@email.com", "1234567", null, "PAssword123!@#");
 
             // Act

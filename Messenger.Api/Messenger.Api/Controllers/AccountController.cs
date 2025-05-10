@@ -21,6 +21,7 @@ namespace Messenger.Api.Controllers
         private readonly IPasswordChecker _passwordChecker;
         private readonly IUserReader _userReader;
         private readonly IUserWriter _userWriter;
+        private readonly ISocialConnectionsReader _socialConnectionsReader;
         private readonly IJsonWebTokenProvider _jsonWebTokenProvider;
         private readonly RandomUserCodeGenerator _randomUserCodeGenerator;
         private readonly ILogger<AccountController> _logger;
@@ -31,6 +32,7 @@ namespace Messenger.Api.Controllers
                                  IPasswordChecker passwordChecker,
                                  IUserReader userReader,
                                  IUserWriter userWriter,
+                                 ISocialConnectionsReader socialConnectionsReader,
                                  IJsonWebTokenProvider jsonWebTokenProvider,
                                  RandomUserCodeGenerator randomUserCodeGenerator,
                                  ILogger<AccountController> logger)
@@ -41,6 +43,7 @@ namespace Messenger.Api.Controllers
             _passwordChecker = passwordChecker;
             _userReader = userReader;
             _userWriter = userWriter;
+            _socialConnectionsReader = socialConnectionsReader;
             _jsonWebTokenProvider = jsonWebTokenProvider;
             _randomUserCodeGenerator = randomUserCodeGenerator;
             _logger = logger;
@@ -64,7 +67,7 @@ namespace Messenger.Api.Controllers
                 if (c > 10)
                     return StatusCode(500, "Something went wrong");
                 userCode = _randomUserCodeGenerator.GetRandomUserCode();
-                var result = await _userReader.FindByUserCode(userCode);
+                var result = await _userReader.SearchByUserCode(userCode);
                 if (result.Code == ResultCode.NotFound)
                     userCodeExists = false;
             }
@@ -79,16 +82,23 @@ namespace Messenger.Api.Controllers
 
             JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(createUserResult.Value!);
 
+            Result<SocialConnectionsDto> socialConnectionsResult = await _socialConnectionsReader.Read(registerDto.Username);
+            if (socialConnectionsResult.Code != ResultCode.Success || socialConnectionsResult.Value is null)
+                return StatusCode(500, "Something went wrong");
+
+            LoginResponseDto loginResponseDto = new(jwt, socialConnectionsResult.Value!);
+
+
             _logger.LogInformation("User {Username} registered", registerDto.Username);
 
-            return Ok(jwt);
+            return Ok(loginResponseDto);
         }
 
         [HttpPost]
         [Route("UsernameLogin")]
         public async Task<IActionResult> UsernameLogin([FromBody] UsernameLoginDto usernameLoginDto)
         {
-            Result<User> findUserResult = await _userReader.FindByUsername(usernameLoginDto.Username);
+            Result<User> findUserResult = await _userReader.SearchByUsername(usernameLoginDto.Username);
 
             if (findUserResult.Code == ResultCode.NotFound)
                 return NotFound("Username doesn't exist");
@@ -110,9 +120,16 @@ namespace Messenger.Api.Controllers
 
             JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(findUserResult.Value!);
 
+            Result<SocialConnectionsDto> socialConnectionsResult = await _socialConnectionsReader.Read(usernameLoginDto.Username);
+            if (socialConnectionsResult.Code != ResultCode.Success || socialConnectionsResult.Value is null)
+                return StatusCode(500, "Something went wrong");
+
+            LoginResponseDto loginResponseDto = new(jwt, socialConnectionsResult.Value!);
+
+
             _logger.LogInformation("User {Username} logged in", usernameLoginDto.Username);
 
-            return Ok(jwt);
+            return Ok(loginResponseDto);
         }
 
         [Authorize]
@@ -121,15 +138,21 @@ namespace Messenger.Api.Controllers
         {
             string username = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
-            Result<User> findUserResult = await _userReader.FindByUsername(username);
+            Result<User> findUserResult = await _userReader.SearchByUsername(username);
             if (findUserResult.Code != ResultCode.Success)
                 return StatusCode(500, "Something went wrong");
 
             JsonWebTokenDto jwt = _jsonWebTokenProvider.CreateJsonWebToken(findUserResult.Value!);
 
+            Result<SocialConnectionsDto> socialConnectionsResult = await _socialConnectionsReader.Read(username);
+            if (socialConnectionsResult.Code != ResultCode.Success || socialConnectionsResult.Value is null)
+                return StatusCode(500, "Something went wrong");
+
+            LoginResponseDto loginResponseDto = new(jwt, socialConnectionsResult.Value!);
+
             _logger.LogInformation("User {Username} refreshed token", username);
 
-            return Ok(jwt);
+            return Ok(loginResponseDto);
         }
 
 

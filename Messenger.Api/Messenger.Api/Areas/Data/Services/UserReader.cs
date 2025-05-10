@@ -17,7 +17,7 @@ namespace Messenger.Api.Areas.Data.Services
             _logger = logger;
         }
 
-        public async Task<Result<User>> FindByUsername(string username)
+        public async Task<Result<User>> SearchByUsername(string username)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Messenger.Api.Areas.Data.Services
             }
         }
 
-        public async Task<Result<User>> FindByUserCode(string userCode)
+        public async Task<Result<User>> SearchByUserCode(string userCode)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Messenger.Api.Areas.Data.Services
             }
         }
 
-        public async Task<Result<User>> FindByEmail(string email)
+        public async Task<Result<User>> SearchByEmail(string email)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Messenger.Api.Areas.Data.Services
             }
         }
 
-        public async Task<Result<User>> FindByPhone(string phone)
+        public async Task<Result<User>> SearchByPhone(string phone)
         {
             try
             {

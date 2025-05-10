@@ -5,9 +5,9 @@ namespace Messenger.Api.Areas.Data.Abstractions
 {
     public interface IUserReader
     {
-        Task<Result<User>> FindByPhone(string phone);
-        Task<Result<User>> FindByUserCode(string userCode);
-        Task<Result<User>> FindByUsername(string username);
-        Task<Result<User>> FindByEmail(string email);
+        Task<Result<User>> SearchByPhone(string phone);
+        Task<Result<User>> SearchByUserCode(string userCode);
+        Task<Result<User>> SearchByUsername(string username);
+        Task<Result<User>> SearchByEmail(string email);
     }
 }

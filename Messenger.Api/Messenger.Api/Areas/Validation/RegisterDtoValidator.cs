@@ -21,7 +21,7 @@ namespace Messenger.Api.Areas.Validation
                     if (ct.IsCancellationRequested)
                         return false;
 
-                    var result = await userReader.FindByUsername(x);
+                    var result = await userReader.SearchByUsername(x);
                     return result.Code == ResultCode.NotFound;
                 })
                 .WithMessage("Username already exists");
@@ -54,7 +54,7 @@ namespace Messenger.Api.Areas.Validation
                     if (ct.IsCancellationRequested)
                         return false;
 
-                    var result = await userReader.FindByEmail(x);
+                    var result = await userReader.SearchByEmail(x);
                     return result.Code == ResultCode.NotFound;
                 })
                 .WithMessage("Email already exists");
@@ -69,7 +69,7 @@ namespace Messenger.Api.Areas.Validation
                     if (ct.IsCancellationRequested)
                         return false;
 
-                    var result = await userReader.FindByPhone(x);
+                    var result = await userReader.SearchByPhone(x);
                     return result.Code == ResultCode.NotFound;
                 })
                 .WithMessage("Phone already exists");

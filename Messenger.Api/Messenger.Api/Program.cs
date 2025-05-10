@@ -24,6 +24,7 @@ namespace Messenger.Api
             builder.Services.AddScoped<IPasswordChecker, PasswordChecker>();
             builder.Services.AddScoped<IJsonWebTokenProvider, JsonWebTokenProvider>();
             builder.Services.AddScoped<IUserReader, UserReader>();
+            builder.Services.AddScoped<ISocialConnectionsReader, SocialConnectionsReader>();
             builder.Services.AddScoped<IUserWriter, UserWriter>();
             builder.Services.AddScoped<IValidator<RegisterDto>, RegisterDtoValidator>();
             builder.Services.AddScoped<IValidator<UsernameLoginDto>, UsernameLoginDtoValidator>();

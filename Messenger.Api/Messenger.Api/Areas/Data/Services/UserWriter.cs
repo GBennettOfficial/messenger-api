@@ -51,23 +51,5 @@ namespace Messenger.Api.Areas.Data.Services
                 return new Result(ResultCode.Error, "Failure updating user in database");
             }
         }
-
-        public async Task<Result> Delete(int id)
-        {
-            try
-            {
-                using SqlConnection conn = new(_connectionString);
-                conn.Open();
-                int rowsEffected = await conn.ExecuteAsync("DELETE FROM Users WHERE Id = @Id", new { id }, commandType: System.Data.CommandType.Text);
-                if (rowsEffected == 0)
-                    return new Result(ResultCode.NotFound, "User not found");
-                return new Result(ResultCode.Success);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting user with id '{Id}'", id);
-                return new Result(ResultCode.Error, "Failure deleting user in database");
-            }
-        }
     }
 }

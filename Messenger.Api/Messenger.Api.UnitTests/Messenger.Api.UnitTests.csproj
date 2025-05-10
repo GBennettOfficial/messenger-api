@@ -22,13 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\..\..\messenger-common\Messenger.Common\Messenger.Common.csproj" />
+    <ProjectReference Include="..\Messenger.Api\Messenger.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\messenger-common\Messenger.Common\Messenger.Common.csproj" />
-    <ProjectReference Include="..\..\..\zmessenger-common\Messenger.Common\Messenger.Common.csproj" />
-    <ProjectReference Include="..\Messenger.Api\Messenger.Api.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>

@@ -53,6 +53,10 @@ namespace Messenger.Api.EndpointTests.Account
                 Assert.True(jwt.Value.Length > 10);
                 Assert.Equal(1, endCount);
             }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.ToString());
+            }
             finally
             {
                 // Clean up
@@ -82,6 +86,10 @@ namespace Messenger.Api.EndpointTests.Account
                 Assert.False(response.IsSuccessStatusCode);
                 Assert.Equal(0, endCount);
                 Assert.Contains("Password must contain at least 2 special chars", content);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.ToString());
             }
             finally
             {

@@ -7,6 +7,7 @@ using Messenger.Api.Utilities;
 using Messenger.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Messenger.Api.Controllers
 {
@@ -118,7 +119,7 @@ namespace Messenger.Api.Controllers
         [HttpGet("RefreshToken")]
         public async Task<IActionResult> RefreshToken()
         {
-            string username = User.Identity!.Name!;
+            string username = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
             Result<User> findUserResult = await _userReader.FindByUsername(username);
             if (findUserResult.Code != ResultCode.Success)
